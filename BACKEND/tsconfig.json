@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",                 // مستوى الجافاسكريبت الناتج
+    "module": "commonjs",               // Node.js كيخدم بها
+    "rootDir": "./src",                 // فين كاين الكود
+    "outDir": "./dist",                 // فين غادي يخرج الكود transpiled
+    "strict": true,                     // يفرض الكتابة الصحيحة
+    "esModuleInterop": true,            // باش تستعمل import من مكتبات CommonJS
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "sourceMap": true                   // باش يبان الكود الأصلي فـ debug
+  },
+  "include": ["src"],                   // الملفات اللي غادي يخدم عليهم
+  "exclude": ["node_modules"]           // مايمسش node_modules
+}
