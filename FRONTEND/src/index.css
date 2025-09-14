@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Geswy Gaming Portfolio Design System - Dark Mode with Orange Gradients */
+
+@layer base {
+  :root {
+    /* Core gaming dark theme */
+    --background: 0 0% 5%;
+    --foreground: 0 0% 95%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 95%;
+
+    /* Orange gaming accent system */
+    --primary: 22 100% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 22 100% 65%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 90%;
+
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 60%;
+
+    --accent: 22 100% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 15%;
+    --input: 0 0% 12%;
+    --ring: 22 100% 55%;
+
+    /* Gaming design tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(22 100% 55%), hsl(30 100% 60%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 8%), hsl(0 0% 12%));
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 5%), hsl(0 0% 8%));
+    
+    /* Glow effects */
+    --shadow-glow: 0 0 40px hsl(22 100% 55% / 0.3);
+    --shadow-card: 0 10px 30px -10px hsl(0 0% 0% / 0.5);
+    --shadow-intense: 0 0 60px hsl(22 100% 55% / 0.5);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: box-shadow 0.3s ease, transform 0.3s ease;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  /* Gaming UI Components */
+  .game-card {
+    @apply relative overflow-hidden rounded-lg bg-card border border-border;
+    background: var(--gradient-card);
+    box-shadow: var(--shadow-card);
+    transition: var(--transition-glow);
+  }
+  
+  .game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+  }
+  
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  .primary-gradient {
+    background: var(--gradient-primary);
+  }
+
+  /* Mouse Follower Effects */
+  .mouse-cursor {
+    @apply hidden;
+  }
+  
+  .mouse-follower {
+    @apply hidden;
+  }
+  
+  @media (hover: hover) {
+    .mouse-cursor {
+      @apply block;
+    }
+    
+    .mouse-follower {
+      @apply block;
+    }
+  }
+
+  /* Enhanced hover effects */
+  .game-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-intense);
+  }
+}
+
+@layer utilities {
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px hsl(22 100% 55% / 0.2);
+    }
+    to {
+      box-shadow: 0 0 40px hsl(22 100% 55% / 0.4);
+    }
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  /* Disable hover effects on touch devices */
+  @media (hover: none) {
+  .game-card:hover {
+    transform: none !important;
+    box-shadow: var(--shadow-card) !important;
+  }
+  }
+
+
+}
