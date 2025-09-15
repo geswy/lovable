@@ -7,9 +7,18 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependency directories
 node_modules
+
+# Production build
 dist
 dist-ssr
+
+# Local env files
+.env
+.env.*       # أي ملف كيبدأ بـ .env (بحال .env.development, .env.production)
+
+# Local configs
 *.local
 
 # Editor directories and files
@@ -22,3 +31,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+

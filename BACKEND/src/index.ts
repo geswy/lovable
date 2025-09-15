@@ -1,26 +1,16 @@
 import express from "express";
 import cors from "cors";
 
-
-
 import newsRoutes from "./routes/news";
 import eventsRoutes from "./routes/events";
-
-
-
 import adblueRoutes from "./routes/adblue";
 import offersRoutes from "./routes/offers";
 
-
-
-
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
-
-
 
 app.use("/api/adblue", adblueRoutes);
 app.use("/api/news", newsRoutes);
