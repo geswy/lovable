@@ -58,14 +58,19 @@ export const createOrder = async (req: Request, res: Response) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        intent: "CAPTURE",
-        purchase_units: [
-          {
-            amount: { currency_code: "USD", value: amount || "20.00" },
-            description: productName || "Default Product",
-          },
-        ],
-      }),
+  intent: "CAPTURE",
+  purchase_units: [
+    {
+      amount: { currency_code: "USD", value: amount || "20.00" },
+      description: productName || "Default Product",
+    },
+  ],
+  application_context: {
+    shipping_preference: "NO_SHIPPING", // ✅ ميطلبش address
+    user_action: "PAY_NOW",             // ✅ يبين "Pay Now" بلا confirm إضافي
+  },
+}),
+
     });
 
     const data: any = await response.json();

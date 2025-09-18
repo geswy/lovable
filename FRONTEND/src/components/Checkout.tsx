@@ -33,29 +33,31 @@ const Checkout = ({ totalPrice, gameTitle, coin, onClose }: any) => {
           clearInterval(checkExist);
           container.innerHTML = "";
 
-          window.paypal
-            .Buttons({
-              style: { layout: "vertical", color: "blue" },
+  window.paypal.Buttons({
+  fundingSource: window.paypal.FUNDING.CARD,
+  style: {
+    layout: "vertical",
+    color: "black",   // ✅ بدلها black أو white
+    shape: "rect",
+    label: "pay",     // النص يكون "Debit or Credit Card"
+  },
+  createOrder: async () => {
+    const cart = {
+      amount: parseFloat(totalPrice),
+      productName: `${gameTitle}-${coin.name}`,
+    };
+    const res = await api.post("/paypal/create-order", cart);
+    return res.data.id;
+  },
+  onApprove: async (data: any) => {
+    const res = await api.post("/paypal/capture-order", {
+      orderID: data.orderID,
+    });
+    alert("✅ Payment successful: " + res.data.status);
+    onClose();
+  },
+}).render("#paypal-buttons");
 
-              createOrder: async () => {
-                const cart = {
-                  amount: parseFloat(totalPrice),
-                  productName: `${gameTitle}-${coin.name}`,
-                };
-
-                const res = await api.post("/paypal/create-order", cart);
-                return res.data.id;
-              },
-
-              onApprove: async (data: any) => {
-                const res = await api.post("/paypal/capture-order", {
-                  orderID: data.orderID,
-                });
-                alert("✅ Payment successful: " + res.data.status);
-                onClose();
-              },
-            })
-            .render("#paypal-buttons");
         }
       }, 100);
     });
