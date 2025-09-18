@@ -20,7 +20,9 @@ app.use("/api/events", eventsRoutes);
 app.use("/api/offers", offersRoutes);
 
 
-
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 
 app.use("/api/paypal", paypalRoutes);
