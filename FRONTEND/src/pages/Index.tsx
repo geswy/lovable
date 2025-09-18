@@ -4,7 +4,8 @@ import GamesShowcase from '@/components/GamesShowcase';
 import About from '@/components/About';
 import Contact from '@/components/Contact';
 import ScrollAnimatedSection from '@/components/ScrollAnimatedSection';
-import BuyNowModal from "../components/BuyNowModal";
+
+
 
 const Index = () => {
   return (
