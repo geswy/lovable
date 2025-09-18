@@ -61,20 +61,23 @@ const Checkout = ({ totalPrice, gameTitle, coin, onClose }: any) => {
     });
   }, [totalPrice, gameTitle, coin, onClose]);
 
-  return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-      <div className="bg-[#111] text-white p-6 rounded-2xl shadow-lg w-[400px]">
-        <h2 className="text-2xl font-bold mb-4 text-center">Checkout</h2>
-        <div id="paypal-buttons"></div>
-        <button
-          onClick={onClose}
-          className="mt-4 w-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold py-2 rounded-lg shadow-md hover:opacity-90 transition"
-        >
-          Cancel
-        </button>
-      </div>
+return (
+  <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+    <div className="bg-[#111] text-white p-6 rounded-2xl shadow-lg w-[400px]">
+      <h2 className="text-2xl font-bold mb-4 text-center">Checkout</h2>
+
+      <div id="paypal-buttons"></div>
+
+      <button
+        onClick={onClose}
+        className="mt-4 w-full bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold py-2 rounded-lg shadow-md hover:opacity-90 transition"
+      >
+        Cancel
+      </button>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Checkout;
