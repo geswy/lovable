@@ -11,9 +11,10 @@ const Streams = () => {
       <div className="max-w-6xl mx-auto">
         <ScrollAnimatedSection>
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              Gaming Streams
-            </h1>
+<h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-orange-500 to-orange-700 bg-clip-text text-transparent">
+  Gaming Streams
+</h1>
+
             <p className="text-xl text-muted-foreground mb-8">
               Watch live gameplay and learn about gaming economies in real-time
             </p>
@@ -47,9 +48,10 @@ const Streams = () => {
                   <span>Live Gameplay</span>
                 </div>
               </div>
-              <Button className="bg-gradient-primary hover:shadow-glow">
-                Notify Me When Live
-              </Button>
+<Button className="btn-primary rounded-lg">
+  Notify Me When Live
+</Button>
+
             </CardContent>
           </Card>
         </ScrollAnimatedSection>

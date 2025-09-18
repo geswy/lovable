@@ -19,9 +19,10 @@ const Offers = () => {
       <div className="max-w-6xl mx-auto">
         <ScrollAnimatedSection>
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              Available Offers
-            </h1>
+<h1 className="text-4xl md:text-5xl font-bold mb-6 primary-gradient bg-clip-text text-transparent">
+  Available Offers
+</h1>
+
             <p className="text-xl text-muted-foreground">
               Complete at least 3 tasks to win free 1 skin
             </p>
@@ -37,11 +38,12 @@ const Offers = () => {
                   <p className="text-muted-foreground">{offer.conversion}</p>
                 </CardHeader>
                 <CardContent>
-                  <Button asChild className="w-full bg-gradient-primary hover:shadow-glow">
-                    <a href={offer.url} target="_blank" rel="noopener noreferrer">
-                      Claim Offer
-                    </a>
-                  </Button>
+<Button asChild className="w-full btn-primary rounded-lg">
+  <a href={offer.url} target="_blank" rel="noopener noreferrer">
+    Claim Offer
+  </a>
+</Button>
+
                 </CardContent>
               </Card>
             </ScrollAnimatedSection>

@@ -3,6 +3,17 @@
 @tailwind utilities;
 
 /* Geswy Gaming Portfolio Design System - Dark Mode with Orange Gradients */
+.btn-primary {
+  background: var(--gradient-primary);
+  color: hsl(var(--primary-foreground));
+  box-shadow: var(--shadow-card);
+  transition: var(--transition-glow);
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-intense);
+  filter: brightness(1.1);
+}
 
 @layer base {
   :root {

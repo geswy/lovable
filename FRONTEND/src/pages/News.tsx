@@ -19,9 +19,10 @@ const News = () => {
       <div className="max-w-4xl mx-auto">
         <ScrollAnimatedSection>
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              Gaming News & Insights
-            </h1>
+<h1 className="text-4xl md:text-5xl font-bold mb-6 primary-gradient bg-clip-text text-transparent">
+  Gaming News & Insights
+</h1>
+
             <p className="text-xl text-muted-foreground">
               Stay updated with the latest in gaming economies and industry trends
             </p>

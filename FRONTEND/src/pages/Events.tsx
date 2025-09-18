@@ -22,9 +22,9 @@ const Events = () => {
       <div className="max-w-6xl mx-auto">
         <ScrollAnimatedSection>
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-              Gaming Events
-            </h1>
+<h1 className="text-4xl md:text-5xl font-bold mb-6 primary-gradient bg-clip-text text-transparent">
+  Gaming Events
+</h1>
             <p className="text-xl text-muted-foreground">
               Join exclusive events, workshops, and community gatherings
             </p>
@@ -68,9 +68,9 @@ const Events = () => {
                       {event.attendees} registered
                     </div>
                   </div>
-                  <Button className="w-full bg-gradient-primary hover:shadow-glow">
-                    Register Now
-                  </Button>
+<Button className="w-full primary-gradient hover:shadow-glow text-white">
+  Register Now
+</Button>
                 </CardContent>
               </Card>
             </ScrollAnimatedSection>

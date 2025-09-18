@@ -2,7 +2,13 @@ import type { Config } from "tailwindcss";
 
 export default {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./index.html",
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   prefix: "",
   theme: {
     container: {
@@ -50,36 +56,42 @@ export default {
         },
       },
       backgroundImage: {
-        'gradient-primary': 'var(--gradient-primary)',
-        'gradient-card': 'var(--gradient-card)',
-        'gradient-hero': 'var(--gradient-hero)',
+        "gradient-primary": "var(--gradient-primary)",
+        "gradient-card": "var(--gradient-card)",
+        "gradient-hero": "var(--gradient-hero)",
       },
       boxShadow: {
-        glow: 'var(--shadow-glow)',
-        'card-dark': 'var(--shadow-card)',
-        intense: 'var(--shadow-intense)',
+        glow: "var(--shadow-glow)",
+        card: "var(--shadow-card)",
+        intense: "var(--shadow-intense)",
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+      },
+      transitionProperty: {
+        glow: "var(--transition-glow)",
       },
       keyframes: {
         glow: {
-          '0%': { boxShadow: '0 0 20px hsl(22 100% 55% / 0.2)' },
-          '100%': { boxShadow: '0 0 40px hsl(22 100% 55% / 0.4)' }
+          "0%": { boxShadow: "0 0 20px hsl(22 100% 55% / 0.2)" },
+          "100%": { boxShadow: "0 0 40px hsl(22 100% 55% / 0.4)" },
         },
         float: {
-          '0%, 100%': { transform: 'translateY(0px)' },
-          '50%': { transform: 'translateY(-10px)' }
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
         },
         "accordion-down": {
           from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" }
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
           from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" }
+          to: { height: "0" },
         },
       },
       animation: {
-        glow: 'glow 2s ease-in-out infinite alternate',
-        float: 'float 3s ease-in-out infinite',
+        glow: "glow 2s ease-in-out infinite alternate",
+        float: "float 3s ease-in-out infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },

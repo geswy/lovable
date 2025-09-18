@@ -4,18 +4,24 @@ import GamesShowcase from '@/components/GamesShowcase';
 import About from '@/components/About';
 import Contact from '@/components/Contact';
 import ScrollAnimatedSection from '@/components/ScrollAnimatedSection';
+import BuyNowModal from "../components/BuyNowModal";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background pt-16">
-      <Hero />
-      <ScrollAnimatedSection animation="slide-up" delay={100}>
+      <ScrollAnimatedSection animation="slide-up" delay={400}>
+        <Hero />
+      </ScrollAnimatedSection>
+
+      <ScrollAnimatedSection animation="slide-up" delay={400}>
         <GamesShowcase />
       </ScrollAnimatedSection>
+
       <ScrollAnimatedSection animation="slide-up" delay={400}>
         <About />
       </ScrollAnimatedSection>
-      <ScrollAnimatedSection animation="slide-up" delay={600}>
+
+      <ScrollAnimatedSection animation="slide-up" delay={400}>
         <Contact />
       </ScrollAnimatedSection>
     </div>

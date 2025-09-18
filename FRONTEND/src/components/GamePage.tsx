@@ -1,60 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { ArrowLeft, Coins, TrendingUp, Users, Star, ShoppingCart, Plus, Minus } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
+import Checkout from "./Checkout";
 
-// Import game backgrounds
-import fifaBg from '@/assets/fifa-bg.jpg';
-import fortniteBg from '@/assets/fortnite-bg.jpg';
-import codBg from '@/assets/cod-bg.jpg';
-import rocketLeagueBg from '@/assets/rocket-league-bg.jpg';
-// Import icons
-
-
-
-// fifa
-import fifaCoinImg from '@/assets/fccoin.png'; 
-import fifaPointsImg from '@/assets/fcpoint.png'; 
-import playerCardImg from '@/assets/fccard.png';
-// rl
-import rlc from '@/assets/rlc.png'; 
-import rlb from '@/assets/rlb.png'; 
-import rlt from '@/assets/rlt.png';
-// cod
-import codp from '@/assets/codp.png'; 
-import codbp from '@/assets/codbp.png'; 
-import codxp from '@/assets/codxp.png';
-//fn
-import fnv from '@/assets/fnv.png'; 
-import fnstar from '@/assets/fnstar.png'; 
-import fncm from '@/assets/fncm.png';
 
 
 
 // Enhanced Coin Card Component
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ChevronDown,} from "lucide-react";
+
+import {ChevronDown, Check } from "lucide-react";
 
 const CoinCard = ({ coin, gameTitle }: { coin: any; gameTitle: string }) => {
   const [quantity, setQuantity] = React.useState(1);
   const [selectedOption, setSelectedOption] = React.useState<any>(null);
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const dropdownRef = React.useRef<HTMLDivElement | null>(null);
+
+  // يسد منين نسكرولو أو نكليكو برا
+  React.useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    const handleScroll = () => {
+      setIsOpen(false);
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const basePrice = parseFloat(
     (selectedOption?.price || coin.price).replace("$", "")
   );
   const totalPrice = (basePrice * quantity).toFixed(2);
 
+const [openCheckout, setOpenCheckout] = useState(false);
   return (
+    
     <div className="p-6 border-r border-border/50 last:border-r-0 hover:bg-secondary/20 transition-all duration-300">
-      <div className="text-center mb-4">
+      <div className="text-center mb-4" ref={dropdownRef}>
+        {/* Icon */}
         <div className="flex justify-center mb-3">
           <img
             src={coin.icon}
@@ -84,38 +85,57 @@ const CoinCard = ({ coin, gameTitle }: { coin: any; gameTitle: string }) => {
         </Badge>
 
         {/* زر الاختيارات */}
+        
         {coin.options && coin.options.length > 0 && (
-          <div className="mt-3">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full flex items-center justify-between"
-                >
-                  {selectedOption ? selectedOption.name : "Choose Skin"}
-                  <ChevronDown className="h-4 w-4 ml-2" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="center"
-                side="top"
-                className="w-full rounded-lg shadow-xl"
-              >
-                {coin.options.map((opt: any, i: number) => (
-                  <DropdownMenuItem
-                    key={i}
-                    className="flex justify-between text-sm cursor-pointer"
-                    onClick={() => setSelectedOption(opt)}
-                  >
-                    <span>{opt.name}</span>
-                    <span className="text-primary font-semibold">
-                      {opt.price}
-                    </span>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+          
+          <div className="mt-3 relative">
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-full flex items-center justify-between rounded-lg shadow-sm border-muted-foreground/30 hover:border-primary transition"
+              onClick={() => setIsOpen(!isOpen)}
+            >
+              {selectedOption ? selectedOption.name : "Choose Skin"}
+              <ChevronDown
+                className={`h-4 w-4 ml-2 transition-transform ${
+                  isOpen ? "rotate-180" : ""
+                }`}
+              />
+            </Button>
+
+            {isOpen && (
+              <div className="absolute z-50 mt-2 w-full rounded-lg shadow-xl bg-background border border-border animate-in fade-in-0 zoom-in-95 duration-200">
+                {coin.options.map((opt: any, i: number) => {
+                  const isSelected = selectedOption?.name === opt.name;
+                  return (
+                    <div
+                      key={i}
+                      className={`flex justify-between items-center text-sm cursor-pointer px-3 py-2 
+                        hover:bg-primary/10 transition rounded-md
+                        ${isSelected ? "bg-primary/5" : ""}`}
+                      onClick={() => {
+                        setSelectedOption(opt);
+                        setIsOpen(false);
+                      }}
+                    >
+                      <span className="flex items-center gap-2">
+                        {isSelected && (
+                          <Check className="h-4 w-4 text-primary" />
+                        )}
+                        {opt.name}
+                      </span>
+                      <span
+                        className={`font-semibold ${
+                          isSelected ? "text-primary" : "text-muted-foreground"
+                        }`}
+                      >
+                        {opt.price}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
         )}
       </div>
@@ -142,13 +162,43 @@ const CoinCard = ({ coin, gameTitle }: { coin: any; gameTitle: string }) => {
           </Button>
         </div>
 
-        <Button className="w-full bg-gradient-primary hover:shadow-glow">
-          Add to Cart
-        </Button>
+      <Button
+      
+        className="w-full mt-2"
+        onClick={() => {
+          
+          try {
+            // ⇦ هنا غير كنفتح المودال
+            setOpenCheckout(true);
+          } catch (err) {
+            console.error("Error creating PayPal order:", err);
+          }
+        }}
+      >
+        Buy Now
+      </Button>
+
+      {/* ⇦ المودال كيتعرض غير إلا كان openCheckout = true */}
+      {openCheckout && (
+       <Checkout
+  totalPrice={totalPrice} // ← استعمل totalPrice اللي محسوب
+  gameTitle={gameTitle}
+  coin={{ name: coin.name }}
+  onClose={() => setOpenCheckout(false)}
+/>
+
+      )}
+
+
+
+
       </div>
     </div>
   );
 };
+
+
+
 
 import { useNavigate } from "react-router-dom";
 
@@ -184,140 +234,8 @@ const PurchaseCard = ({ coin }: { coin: any }) => {
   );
 };
 
+import gameData from "@/data/gameData";
 
-
-
-
-const gameData = {
-  fifa: {
-    title: 'FIFA 24',
-    subtitle: 'Ultimate Team Economy',
-    image: fifaBg,
-    description: 'FIFA Ultimate Team features one of the most complex in-game economies in sports gaming, with multiple currency types and marketplace dynamics.',
-    coins: [
-  { name: 'FUT Coins', icon: fifaCoinImg, label: 'Most Popular', price: '$3', quickPrice: 'Complete at least 3 offers to claim the offer',quickLabel: '514,000', description: 'Primary currency for player transfers and packs',
-        options: [
-    { name: "Galaxy", price: "$12.99" },
-    { name: "Renega", price: "$15.99" },
-    { name: "Travis", price: "$19.99" }
-  ]},
-  { name: 'FIFA Points', icon: fifaPointsImg, label: 'Most Popular', price: '$2', quickPrice: 'Complete at least 3 offers to claim the offer',quickLabel: '514,000', description: 'Premium currency for special packs',
-        options: [
-    { name: "Galaxy", price: "$12.99" },
-    { name: "Renega", price: "$15.99" },
-    { name: "Travis", price: "$19.99" }
-  ]
-  },
-  { name: 'Player Cards', icon: playerCardImg, label: 'Most Popular', price: '$3', quickPrice: 'Complete at least 3 offers to claim the offer',quickLabel: '514,000', description: 'Individual player items currency for player',
-        options: [
-    { name: "Galaxy", price: "$12.99" },
-    { name: "Renega", price: "$15.99" },
-    { name: "Travis", price: "$19.99" }
-  ]
-  }
-],
-    stats: { players: '50M+', transactions: '1B+', revenue: '$1.8B' }
-  },
-  
-  
-  
-  fortnite: {
-    title: 'Fortnite',
-    subtitle: 'Battle Royale Marketplace',
-    image: fortniteBg,
-    description: 'Fortnite revolutionized gaming cosmetics with V-Bucks creating a massive virtual economy centered around skins, emotes, and battle passes.',
-    coins: [
-      { name: 'V-Bucks', icon: fnv, label: 'Most Popular', price: '$7.99', quickPrice: 'Complete at least 3 offers to claim the offer',quickLabel: '514,000', description: 'Universal currency for all cosmetic purchases',
-            options: [
-    { name: "Galaxy", price: "$12.99" },
-    { name: "Renega", price: "$15.99" },
-    { name: "Travis", price: "$19.99" }
-  ]
-      },
-      { name: 'Battle Stars', icon: fnstar, label: 'Most Popular', price: '$4.99', quickPrice: 'Complete at least 3 offers to claim the offer',quickLabel: '514,000', description: 'Battle Pass progression currency items',
-            options: [
-    { name: "Galaxy", price: "$12.99" },
-    { name: "Renega", price: "$15.99" },
-    { name: "Travis", price: "$19.99" }
-  ]
-      },
-      { name: 'Cosmetics', icon: fncm, label: 'Most Popular', price: '$12.99', quickPrice: 'Complete at least 3 offers to claim the offer',quickLabel: '514,000', description: 'Skins, emotes, and customization items',
-            options: [
-    { name: "Galaxy", price: "$12.99" },
-    { name: "Renega", price: "$15.99" },
-    { name: "Travis", price: "$19.99" }
-  ]
-      }
-    ],
-    stats: { players: '400M+', transactions: '2.5B+', revenue: '$9.9B' }
-  },
-  
-  
-  
-  cod: {
-    title: 'Call of Duty',
-    subtitle: 'Warzone & Multiplayer Economy',
-    image: codBg,
-    description: 'Call of Duty features COD Points as the backbone of its monetization, powering weapon blueprints, operator skins, and battle pass content.',
-    coins: [
-      { name: 'COD Points', icon: codp, label: 'Most Popular', price: '$9.99', quickPrice: 'Complete at least 3 offers to claim the offer',quickLabel: '514,000', description: 'Premium currency for battle pass and bundles',
-            options: [
-    { name: "Galaxy", price: "$12.99" },
-    { name: "Renega", price: "$15.99" },
-    { name: "Travis", price: "$19.99" }
-  ]
-      },
-      { name: 'Battle Pass Tokens', icon: codbp, label: 'Most Popular', price: '$4.99', quickPrice: 'Complete at least 3 offers to claim the offer',quickLabel: '514,000', description: 'Tier skip tokens for battle pass progression',
-            options: [
-    { name: "Galaxy", price: "$12.99" },
-    { name: "Renega", price: "$15.99" },
-    { name: "Travis", price: "$19.99" }
-  ]
-      },
-      { name: 'Weapon XP', icon: codxp, label: 'Most Popular', price: '$2.99', quickPrice: 'Complete at least 3 offers to claim the offer',quickLabel: '514,000', description: 'Experience boosts for weapon leveling',
-            options: [
-    { name: "Galaxy", price: "$12.99" },
-    { name: "Renega", price: "$15.99" },
-    { name: "Travis", price: "$19.99" }
-  ]
-      }
-    ],
-    stats: { players: '100M+', transactions: '800M+', revenue: '$3.2B' }
-  },
-  
-  
-  
-  'rocket-league': {
-    title: 'Rocket League',
-    subtitle: 'Car Customization Economy',
-    image: rocketLeagueBg,
-    description: 'Rocket League transformed from premium to free-to-play with Credits powering an extensive car customization ecosystem.',
-    coins: [
-      { name: 'Credits', icon: rlc, label: 'Most Popular', price: '$4.99', quickPrice: 'Complete at least 3 offers to claim the offer',quickLabel: '514,000', description: 'Primary currency for trading and item shop',
-            options: [
-    { name: "Galaxy", price: "$12.99" },
-    { name: "Renega", price: "$15.99" },
-    { name: "Travis", price: "$19.99" }
-  ]
-      },
-      { name: 'Blueprints', icon: rlb, label: 'Most Popular', price: '$1.99', quickPrice: 'Complete at least 3 offers to claim the offer',quickLabel: '514,000', description: 'Craftable item schematics competitive play',
-            options: [
-    { name: "Galaxy", price: "$12.99" },
-    { name: "Renega", price: "$15.99" },
-    { name: "Travis", price: "$19.99" }
-  ]
-      },
-      { name: 'Tournament Credits', icon: rlt, label: 'Most Popular', price: '$0.99', quickPrice: 'Complete at least 3 offers to claim the offer',quickLabel: '514,000', description: 'Earned currency from competitive play',
-            options: [
-    { name: "Galaxy", price: "$12.99" },
-    { name: "Renega", price: "$15.99" },
-    { name: "Travis", price: "$19.99" }
-  ]
-      }
-    ],
-    stats: { players: '75M+', transactions: '500M+', revenue: '$500M' }
-  }
-};
 
 const GamePage = () => {
   const { gameId } = useParams();

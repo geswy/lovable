@@ -10,8 +10,65 @@ import fifaBg from '@/assets/fifa-bg.jpg';
 import fortniteBg from '@/assets/fortnite-bg.jpg';
 import codBg from '@/assets/cod-bg.jpg';
 import rocketLeagueBg from '@/assets/rocket-league-bg.jpg';
+import FF from '@/assets/FF.jpg';
+import clashofclans from '@/assets/coc.jpg';
+import valo from '@/assets/valo.png';
+import pes from '@/assets/pes.png';
+import mc from '@/assets/mc.jpg';
+import rx from '@/assets/rx.jpg';
 
 const games = [
+  
+
+  
+  {
+    id: 'Roblox',
+    title: 'Roblox',
+    description: 'Ultimate Team coins, players, and packs ecosystem',
+    image: rx,
+    coins: ['FUT Coins', 'FIFA Points', 'Player Cards'],
+    category: 'Sports'
+  },
+  {
+    id: 'Minecraft',
+    title: 'Minecraft',
+    description: 'Ultimate Team coins, players, and packs ecosystem',
+    image: mc,
+    coins: ['FUT Coins', 'FIFA Points', 'Player Cards'],
+    category: 'Sports'
+  },
+  {
+    id: 'eFootbal',
+    title: 'eFootbal',
+    description: 'Ultimate Team coins, players, and packs ecosystem',
+    image: pes,
+    coins: ['FUT Coins', 'FIFA Points', 'Player Cards'],
+    category: 'Sports'
+  },
+  {
+    id: 'valorant',
+    title: 'VALORANT',
+    description: 'Ultimate Team coins, players, and packs ecosystem',
+    image: valo,
+    coins: ['FUT Coins', 'FIFA Points', 'Player Cards'],
+    category: 'Sports'
+  },
+  {
+    id: 'clashofclans',
+    title: 'Clash of Clans',
+    description: 'Ultimate Team coins, players, and packs ecosystem',
+    image: clashofclans,
+    coins: ['FUT Coins', 'FIFA Points', 'Player Cards'],
+    category: 'Sports'
+  },
+  {
+    id: 'freefire',
+    title: 'FREE FIRE',
+    description: 'Ultimate Team coins, players, and packs ecosystem',
+    image: FF,
+    coins: ['FUT Coins', 'FIFA Points', 'Player Cards'],
+    category: 'Sports'
+  },
   {
     id: 'fifa',
     title: 'FIFA 24',
@@ -48,13 +105,14 @@ const games = [
 
 const GamesShowcase = () => {
   return (
-    <section className="py-20 px-6">
+    <section className="pt-0 pb-20 px-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-            Game Economies Showcase
-          </h2>
+<h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
+  Game Economies Showcase
+</h2>
+
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Explore the intricate in-game economies and currency systems of today's most popular games
           </p>
@@ -104,14 +162,17 @@ const GamesShowcase = () => {
               ))}
             </div>
 
-            <Button
-              variant="outline"
-              className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all"
-            >
-              <ShoppingCart className="mr-2 h-4 w-4" />
-              Explore Economy
-              <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Button>
+<div className="group">
+  <Button
+    variant="outline"
+    className="w-full group-hover:bg-primary group-hover:text-primary-foreground group-hover:border-primary transition-all"
+  >
+    <ShoppingCart className="mr-2 h-4 w-4" />
+    Explore Economy
+    <ChevronRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+  </Button>
+</div>
+
           </CardContent>
         </Card>
       </Link>
@@ -122,6 +183,7 @@ const GamesShowcase = () => {
       </div>
     </section>
   );
+  
 };
 
 export default GamesShowcase;

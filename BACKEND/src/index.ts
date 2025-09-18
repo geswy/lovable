@@ -5,7 +5,9 @@ import newsRoutes from "./routes/news";
 import eventsRoutes from "./routes/events";
 import adblueRoutes from "./routes/adblue";
 import offersRoutes from "./routes/offers";
-
+import paypalRoutes from "./routes/paypal";
+import dotenv from "dotenv";
+dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -16,6 +18,12 @@ app.use("/api/adblue", adblueRoutes);
 app.use("/api/news", newsRoutes);
 app.use("/api/events", eventsRoutes);
 app.use("/api/offers", offersRoutes);
+
+
+
+
+
+app.use("/api/paypal", paypalRoutes);
 
 // Fake news data (حالياً ستاتيك، من بعد تقدر تجيبها من DB)
 const newsItems = [

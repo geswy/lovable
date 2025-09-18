@@ -5,7 +5,8 @@ import geswykLogo from '@/assets/geswy-logo.jpg';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-gradient">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden hero-gradient">
+      
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-primary rounded-full animate-glow"></div>
@@ -18,15 +19,13 @@ const Hero = () => {
         <div className="mb-8 animate-float">
           <img 
             src={geswykLogo} 
-            alt="Geswy Gaming " 
+            alt="Geswy Gaming" 
             className="h-13 mx-auto rounded-lg shadow-glow"
           />
         </div>
 
         {/* Main heading */}
-        <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent">
-          
-        </h1>
+        <h1 className="text-6xl md:text-7xl font-bold mb-6 bg-gradient-primary bg-clip-text text-transparent"></h1>
         
         <p className="text-xl md:text-2xl text-muted-foreground mb-4">
           Gaming meets Creativity
@@ -56,21 +55,24 @@ const Hero = () => {
             View More
           </Button>
         </div>
+      </div>
 
-        {/* Skills badges */}
-        <div className="flex flex-wrap gap-4 justify-center mt-16">
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border">
-            <Sparkles className="h-4 w-4 text-primary" />
-            <span className="text-sm">Video Editing</span>
-          </div>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border">
-            <Trophy className="h-4 w-4 text-primary" />
-            <span className="text-sm">Creative Design</span>
-          </div>
-          <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border">
-            <Gamepad2 className="h-4 w-4 text-primary" />
-            <span className="text-sm">Gaming Enthusiast</span>
-          </div>
+      {/* Gradient background covering full width under badges */}
+      <div className="absolute bottom-0 inset-x-0 h-48 bg-gradient-to-b from-transparent to-[hsl(var(--background))]"></div>
+
+      {/* Skills badges */}
+      <div className="relative z-10 mt-16 flex flex-wrap gap-4 justify-center">
+        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border">
+          <Sparkles className="h-4 w-4 text-primary" />
+          <span className="text-sm">Video Editing</span>
+        </div>
+        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border">
+          <Trophy className="h-4 w-4 text-primary" />
+          <span className="text-sm">Creative Design</span>
+        </div>
+        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border">
+          <Gamepad2 className="h-4 w-4 text-primary" />
+          <span className="text-sm">Gaming Enthusiast</span>
         </div>
       </div>
     </section>
